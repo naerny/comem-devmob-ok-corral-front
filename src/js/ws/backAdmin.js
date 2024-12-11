@@ -1,7 +1,7 @@
-import WsClient from '../websocket/WSClient.js';
+import WsClient from './websocketlibrary/WSClient.js';
 
 // WebSocket
-const wsClient = new WsClient('ws://10.192.111.230:5173');
+const wsClient = new WsClient('ws://10.191.56.80:5173');
 await wsClient.connect();
 
 // WebSocket Sub

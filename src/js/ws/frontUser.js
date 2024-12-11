@@ -1,6 +1,6 @@
-import WsClient from '../websocket/WSClient.js';
+import WsClient from './websocketlibrary/WSClient.js';
 
-const wsClient = new WsClient('ws://localhost:8887');
+const wsClient = new WsClient('ws://10.191.56.80:8080');
 await wsClient.connect();
 
 document.addEventListener('click', (event) => {

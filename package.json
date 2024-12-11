@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "circle:server": "node src/backend/CircleServer.mjs",
-    "server": "node src/js/ws/server.mjs"
+    "server": "node src/js/ws/backend/CircleServer.mjs"
   },
   "dependencies": {
     "vue": "^3.5.12",
