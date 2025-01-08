@@ -1,13 +1,13 @@
 <template>
   <main>
     <h1>Poc</h1>
-    
+
     <button @click="startDuel()">Start Duel</button>
     <div>
       <h2>Message from server</h2>
       <div class="message"></div>
     </div>
-    
+
   </main>
 </template>
 
@@ -42,5 +42,9 @@ document.addEventListener('click', (event) => {
 </script>
 
 <style scoped>
-/* Add your styles here */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

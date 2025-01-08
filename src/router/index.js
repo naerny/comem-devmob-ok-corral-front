@@ -10,8 +10,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: HomeView,
     },
     // {
@@ -23,23 +23,23 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue'),
     // },
     {
-      path: '/user',
-      name: 'user',
+      path: "/user",
+      name: "user",
       component: UserView,
     },
     {
-      path: '/poc',
-      name: 'poc',
+      path: "/poc",
+      name: "poc",
       component: PocView,
     },
     {
-      path: '/login',
-      name: 'login',
+      path: "/login",
+      name: "login",
       component: LoginView,
     },
     {
-      path: '/register',
-      name: 'register',
+      path: "/register",
+      name: "register",
       component: RegisterView,
     },
     {
@@ -48,6 +48,6 @@ const router = createRouter({
       component: SessionView,
     },
   ],
-})
+});
 
-export default router
+export default router;

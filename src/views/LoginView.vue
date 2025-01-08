@@ -7,5 +7,4 @@ import FormLogin from '@/components/forms/FormLogin.vue';
     <FormLogin />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
