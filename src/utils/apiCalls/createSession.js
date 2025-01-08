@@ -1,21 +1,16 @@
 import axios from "axios";
 import userToken from "@/utils/localStorage.js";
 
-export const getSessions = async () => {
+const createSession = async () => {
   try {
     const response = await axios.post(
       "https://comem-archioweb-ok-corral-api.onrender.com/session",
-      {},
       {
         headers: {
           Authorization: `Bearer ${userToken.userToken.getUserToken()}`,
         },
       }
     );
-
-    console.log("Response:", response.data);
-    return response.data;
-    // Handle success (e.g., redirecting to another page)
   } catch (error) {
     console.error(
       "Error:",
@@ -24,3 +19,5 @@ export const getSessions = async () => {
     // Handle error (e.g., showing an error message)
   }
 };
+
+export default createSession;

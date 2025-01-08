@@ -2,7 +2,7 @@
 import login from "@/utils/apiCalls/login.js";
 
 const formFields = [
-{
+    {
         name: "username",
         label: "Username",
         value: "nicolas",
@@ -23,13 +23,10 @@ const formFields = [
 </script>
 
 <template>
-     <form
-        @submit.prevent="
-            () => {
-                login(formFields[0].value, formFields[1].value);                
-            }
-        "
-    >
+    <form @submit.prevent="() => {
+        joinSessionMobile(formFields[0].value, formFields[1].value);
+    }
+        ">
         <div class="flex flex-col gap-6">
             <div v-for="(field, index) in formFields" :key="index">
                 <label :for="field.name">{{ field.label }}</label>

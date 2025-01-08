@@ -11,10 +11,10 @@ import HeaderComponent from './views/components/HeaderComponent.vue';
   <nav>
     <HeaderComponent />
     <div class="container">
-    <div class="form">
-      <RouterView />
+      <div class="form">
+        <RouterView />
+      </div>
     </div>
-  </div>
   </nav>
   <button @click="logout">Déconnecter</button>
 

@@ -2,7 +2,7 @@
 import register from "@/utils/apiCalls/register.js";
 
 const formFields = [
-{
+    {
         name: "username",
         label: "Username",
         value: "usertest1",
@@ -31,17 +31,14 @@ const formFields = [
 </script>
 
 <template>
-     <form
-        @submit.prevent="
-            () => {
-                register(formFields[0].value, formFields[1].value, formFields[2].value);                
-            }
-        "
-    >
+    <form @submit.prevent="() => {
+        register(formFields[0].value, formFields[1].value, formFields[2].value);
+    }
+        ">
         <div class="flex flex-col gap-6">
             <div v-for="(field, index) in formFields" :key="index">
                 <label :for="field.name">{{ field.label }}</label>
-                <input :id="field.name" :name="field.name" v-model.type="field.value" :type="field.type"
+                <input :id="field.name" :name="field.name" v-model="field.value" :type="field.type"
                     :placeholder="field.placeholder" required />
             </div>
             <button type="submit" class="btn self-center">S'inscrire</button>

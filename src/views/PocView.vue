@@ -1,5 +1,11 @@
 <template>
   <main>
+    <h1>Create session</h1>
+    <div>
+      <button @click="create()">Create session</button>
+    </div>
+
+
     <h1>Poc</h1>
 
     <button @click="startDuel()">Start Duel</button>
@@ -18,19 +24,29 @@
 // import { WebSocketServer } from 'ws';
 // import { fetchOrientation } from '@/utils/deviceOrientation';
 // import {isMobile} from '@/utils/mobileDetect.js';
-import {useWebsocket} from '@/composables/useWebsocket.js';
+import { ref } from 'vue';
+import { useWebsocket } from '@/composables/useWebsocket.js';
+import createSession from '@/utils/apiCalls/createSession.js';
+
+const response = ref('');
+const create = async () => {
+  console.log('createSession');
+  response.value = await createSession();
+  console.log(response);
+  // ws.send('createSession');
+};
 
 // sessionStorage.createSorage();
 
-const {sendPosition} = useWebsocket(2123);
+// const { sendPosition } = useWebsocket(2123);
 
-document.addEventListener('click', (event) => {
- const position = {
-   x: event.clientX,
-   y: event.clientY
- };
- sendPosition(position);
-});
+// document.addEventListener('click', (event) => {
+//   const position = {
+//     x: event.clientX,
+//     y: event.clientY
+//   };
+//   sendPosition(position);
+// });
 
 
 
