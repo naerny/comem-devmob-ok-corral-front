@@ -1,6 +1,6 @@
 import storeSessionData from '../stores/sessionDataStore.js';
 
-export const sessionStorage = {
+const sessionStorage = {
     // if a property value is updated, the localStorage is updated
     update: function (key, value) {
         sessionStorage.datas[key] = value;
@@ -15,3 +15,20 @@ export const sessionStorage = {
         console.log('createSorage');
     },
 }
+
+const userToken = {
+    setUserToken: function (token) {
+        localStorage.setItem('userToken', token);
+        console.log('User token set:', token);
+    },
+    getUserToken: function () {
+        return localStorage.getItem('userToken');
+    },
+    removeUserToken: function () {
+        localStorage.removeItem('userToken');
+        console.log('User token removed');
+    }
+};
+
+export default { sessionStorage, userToken };
+
