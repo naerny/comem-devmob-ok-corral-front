@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { isMobile } from './utils/mobileDetect';
-import { logout } from './utils/apiCalls/logout.js';
 import HeaderComponent from './views/components/HeaderComponent.vue';
 
 </script>
@@ -16,7 +15,6 @@ import HeaderComponent from './views/components/HeaderComponent.vue';
       </div>
     </div>
   </nav>
-  <button @click="logout">Déconnecter</button>
 
   <!-- <RouterView /> -->
 </template>

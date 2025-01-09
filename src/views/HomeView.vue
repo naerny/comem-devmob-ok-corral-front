@@ -6,7 +6,7 @@ import { isMobile } from '@/utils/mobileDetect';
 <template>
   <main>
     <h1>Duel à OK Corral</h1>
-    <button v-if="!isMobile">Créer une session</button>
+    <button v-if="!isMobile">Voici les règles du duel</button>
     <div v-if="isMobile">
       <input type="text" id="inputUsername" placeholder="Username">
       <button @click="sendMessage">Send</button>

@@ -1,19 +1,35 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { isMobile } from '../../utils/mobileDetect';
+import userToken from "@/utils/localStorage.js";
+import { ref, watchEffect } from 'vue';
+import { logout } from '../../utils/apiCalls/logout.js';
+
+
+const token = ref(userToken);
+
+// Cette fonction sera réexécutée automatiquement quand le localStorage change
+watchEffect(() => {
+    token.value = userToken.userToken.getUserToken();
+});
 
 </script>
 
+
 <template>
     <div class="containerHeader">
-        <nav>
+        <nav v-if="token">
             <RouterLink to="/"><span class="material-symbols-outlined">home</span>Home</RouterLink>
-            <RouterLink to="/login"><span class="material-symbols-outlined">login</span>
-                Se connecter</RouterLink>
-            <RouterLink to="/register"><span class="material-symbols-outlined">app_registration</span>
-                S'enregistrer</RouterLink>
-            <RouterLink to="/poc"><span class="material-symbols-outlined">stadia_controller</span>
-                Jouer</RouterLink>
+            <RouterLink to="/poc"><span class="material-symbols-outlined">stadia_controller</span>Jouer</RouterLink>
+            <RouterLink to="/"><button class="material-symbols-outlined" @click="logout">logout</button>Se déconnecter
+            </RouterLink>
+        </nav>
+        <nav v-else>
+            <RouterLink to="/"><span class="material-symbols-outlined">home</span>Home</RouterLink>
+            <RouterLink to="/login"><span class="material-symbols-outlined">login</span>Se connecter</RouterLink>
+            <RouterLink to="/register"><span class="material-symbols-outlined">app_registration</span>S'enregistrer
+            </RouterLink>
+
         </nav>
     </div>
 </template>
