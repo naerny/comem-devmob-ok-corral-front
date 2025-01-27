@@ -1,21 +1,35 @@
 import axios from "axios";
-import userToken from '@/utils/localStorage.js';
+import {userToken} from '@/utils/localStorage.js';
+import { useLogInStore } from '@/stores/storeUserLogIn.js';
+import { showModal } from '@/utils/modalManager.js';
+import router from '@/router/index.js';
 
 export const logout = async () => {    
-    const token = userToken.userToken.getUserToken();
+    const token = userToken.getUserToken();
+
+
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
 
     try {
-        const response = await axios.post(
-            "https://comem-archioweb-ok-corral-api.onrender.com/user/logout",            
+       const response = await axios.post(
+            `${import.meta.env.VITE_API_URL}/user/logout`,
+            {}, // Empty body
             {
-                headers: {                    
+                headers: {     
+                    "Content-Type": "application/json",               
                     Authorization: `Bearer ${token}`,
                 },
             }
         );
 
         console.log("Response:", response.data);
-        userToken.userToken.removeUserToken();
+        // userToken.removeUserToken();
+        const { setToken } = useLogInStore();
+        setToken(null);
+        showModal(response.data.message);        
+        router.push('/');
         return response.data;
         // Handle success (e.g., redirecting to another page)
     } catch (error) {
@@ -23,6 +37,7 @@ export const logout = async () => {
             "Error:",
             error.response ? error.response.data : error.message
         );
+        showModal(error.response ? error.response.data : error.message);
         // Handle error (e.g., showing an error message)
     }
 };

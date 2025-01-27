@@ -1,20 +1,83 @@
 
-import WsClient from '../js/ws/websocketlibrary/WSClient.js';
+import WsClient from '../websocketlibrary/WSClient.js';
+import { useSessionStore } from "@/stores/storeSession.js";
+const { setSessionPlayers, setSession } = useSessionStore();
+import { usePlayerStore } from "@/stores/storePlayers.js";
+const { setPlayerResults } = usePlayerStore();
+import { useGameManager } from '@/utils/gameManager.js';
+import { currentSessionPlayers } from '@/utils/localStorage.js';
+const { gameStarted, resultsObtained, endGame, GameResults } = useGameManager();
+import router from '@/router/index.js';
+import { showModal } from '@/utils/modalManager.js';
 
-const wsClient = new WsClient('ws://10.191.46.151:8080');
+export const wsClient = new WsClient(`ws://${import.meta.env.VITE_WS_URL}:8887`);
 await wsClient.connect();
 
+// wsClient.sub('duel_123456', (message) => {
+//   console.log(message);
+// });
+
+export function useWebsocket() {
+
+    function sub(sessionId) {
+        wsClient.sub(sessionId, (message) => {
+
+            if (message.action === 'playerCount') {
+                setSessionPlayers(message.count);
+                console.log('playerCount:', message.count);
+                if (!localStorage.getItem('player_id')) {
+                    localStorage.setItem('player_id', message.count);
+                }
+
+            } else if (message.action === 'closeSession') {
+                setSessionPlayers(0);
+                setSession(null, null);
+                localStorage.removeItem('player1_result');
+                localStorage.removeItem('player2_result');
+                localStorage.removeItem('player_id');
+                GameResults.value = false;
+                console.log('closeSession');
+                router.push('/');
+                showModal('Session was closed by Admin');
 
 
-export function useWebsocket(gameId) {
-    
-    function sendPosition(position) {
-        wsClient.pub('circle-sync', position);
-        wsClient.pub(`game-${gameId}`, position);
+            } else if (message.action === 'startGame') {
+                // setSession(message.session, message.players);
+                gameStarted.value = true;
+                console.log('startGame');
+
+            } else if (message.action === 'playerResult') {
+                if (localStorage.getItem('player1_result')) {
+                    localStorage.setItem('player2_result', JSON.stringify(message.result));
+                } else {
+                    localStorage.setItem('player1_result', JSON.stringify(message.result));
+                }
+                console.log('message', message);
+                resultsObtained.value += 1;
+                if (resultsObtained.value === 2) {
+                    endGame();
+                    console.log('Game Ended');
+                }
+
+            } else if (message.action === 'endGame') {
+                // setSession(message.session, message.players);                
+                console.log('endGame');
+                showModal('Game Ended');
+
+            } else {
+                console.log('Unknown action');
+            }
+        });
     }
 
-  return {
-    sendPosition,
-    wsClient,
-  }
+    function pub(sessionId, message) {
+        wsClient.pub(sessionId, message);
+        console.log('pub:', sessionId, message);
+    }
+
+    return {
+        sub,
+        pub,
+        wsClient,
+    }
 }

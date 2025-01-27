@@ -1,12 +1,12 @@
 import axios from "axios";
 import {userToken} from '@/utils/localStorage.js';
 
-export const getSessions = async () => {    
+export const getGames = async () => {    
      const token = userToken.getUserToken();
 
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/session`,            
+            `${import.meta.env.VITE_API_URL}/game`,            
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -14,8 +14,8 @@ export const getSessions = async () => {
             }
         );
 
-        console.log("Response:", response.data);
-        return response.data;
+        console.log("Response:", response.data.games);
+        return response.data.games;
         // Handle success (e.g., redirecting to another page)
     } catch (error) {
         console.error(

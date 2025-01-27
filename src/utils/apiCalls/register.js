@@ -1,5 +1,7 @@
 import axios from "axios";
-import userToken from '@/utils/localStorage.js';
+import {userToken} from '@/utils/localStorage.js';
+import router from '@/router/index.js';
+import { showModal } from '@/utils/modalManager.js';
 
 const register = async (
     usernameValue,
@@ -15,7 +17,7 @@ const register = async (
 
     try {
         const response = await axios.post(
-            "https://comem-archioweb-ok-corral-api.onrender.com/user",
+            `${import.meta.env.VITE_API_URL}/user`,
             data,
             {
                 headers: {
@@ -25,7 +27,9 @@ const register = async (
         );
 
         console.log("Response:", response.data);
-        userToken.userToken.setUserToken(response.data.token);
+        userToken.setUserToken(response.data.token);
+        showModal(response.data.message); 
+        router.push('/');
         // Handle success (e.g., redirecting to another page)
     } catch (error) {
         console.error(

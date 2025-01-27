@@ -1,12 +1,12 @@
 import axios from "axios";
 import {userToken} from '@/utils/localStorage.js';
 
-export const getSessions = async () => {    
+export const getUsers = async () => {    
      const token = userToken.getUserToken();
 
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/session`,            
+            `${import.meta.env.VITE_API_URL}/user`,            
             {
                 headers: {
                     Authorization: `Bearer ${token}`,

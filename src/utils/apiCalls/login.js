@@ -1,5 +1,8 @@
 import axios from "axios";
-import userToken from '@/utils/localStorage.js';
+import {userToken} from '@/utils/localStorage.js';
+import { useLogInStore } from '@/stores/storeUserLogIn.js';
+import { showModal } from '@/utils/modalManager.js';
+import router from '@/router/index.js';
 
 const login = async (
     usernameValue,
@@ -13,7 +16,7 @@ const login = async (
 
     try {
         const response = await axios.post(
-            "https://comem-archioweb-ok-corral-api.onrender.com/user/login",
+            `${import.meta.env.VITE_API_URL}/user/login`,
             data,
             {
                 headers: {
@@ -23,13 +26,18 @@ const login = async (
         );
 
         console.log("Response:", response.data);
-        userToken.userToken.setUserToken(response.data.token);
+        // userToken.setUserToken(response.data.token);
+        const { setToken } = useLogInStore();
+        setToken(response.data.token);                 
+        router.push({ name: 'home' });        
+        showModal(response.data.message);   
         // Handle success (e.g., redirecting to another page)
     } catch (error) {
         console.error(
             "Error:",
             error.response ? error.response.data : error.message
-        );
+        );        
+        showModal(error.response.data.error);
         // Handle error (e.g., showing an error message)
     }
 };

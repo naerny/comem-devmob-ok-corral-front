@@ -5,6 +5,10 @@ import PocView from '../views/PocView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import SessionView from '@/views/SessionView.vue'
+import RessourcesView from '@/views/RessourcesView.vue'
+import { useSessionStore } from '@/stores/storeSession.js';
+const { hasSession } = useSessionStore();
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,28 +30,42 @@ const router = createRouter({
       path: "/user",
       name: "user",
       component: UserView,
-    },
-    {
-      path: "/poc",
-      name: "poc",
-      component: PocView,
-    },
+    },    
     {
       path: "/login",
       name: "login",
       component: LoginView,
+      // meta: { requiresAuth: true },
     },
     {
       path: "/register",
       name: "register",
       component: RegisterView,
-    },
+      // meta: { requiresAuth: true },
+    },   
     {
-      path: '/session',
-      name: 'session',
-      component: SessionView,
+      path: '/ressources',
+      name: 'ressources',
+      component: RessourcesView,
+      // meta: { requiresAuth: true },
     },
   ],
 });
+
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if (hasSession) {
+//       next({
+//         path: '/',
+//         // query: { redirect: to.fullPath } // Save the intended route for redirection after login
+//       });
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

@@ -191,7 +191,7 @@ export default class WSClient {
         this.off(`ws:pub:${chan}`, callback);
         if (resp.type === 'success') {
           resolve(resp.response)
-        } else {
+        } else {          
           reject(new Error(resp.response));
         }
       };

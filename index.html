@@ -14,9 +14,17 @@
   <style>
     :root {
       --brown: #6f3317;
-      --orange: #cf7239;
+      --orange: #e88141;
       --gray: #2b2a28;
       --beige: #f5dacf;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -27,7 +35,7 @@
     }
 
     #app {
-      height: 100vh;
+      min-height: 100vh;
       width: 100vw;
       background-color: var(--beige);
       display: flex;
@@ -35,13 +43,16 @@
     }
 
     button {
-      margin: 10px 0;
+      /* margin: 10px 0; */
+      margin-top: 2rem;
       background-color: var(--brown);
       color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 15px;
       cursor: pointer;
+      width: fit-content;
+      align-self: center;
     }
     button:hover {
       background-color: var(--gray);
@@ -49,6 +60,7 @@
 
     h1 {
       text-align: center;
+      font-size: 3rem;
     }
   </style>
   <body>

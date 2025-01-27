@@ -1,22 +1,4 @@
-import storeSessionData from '../stores/sessionDataStore.js';
-
-const sessionStorage = {
-    // if a property value is updated, the localStorage is updated
-    update: function (key, value) {
-        sessionStorage.datas[key] = value;
-        localStorage.setItem(`session${sessionStorage.session_id}`, JSON.stringify(sessionStorage.datas));
-        console.log('update');
-    },    
-
-    createSorage: function () {
-        if (!localStorage.getItem(`session${storeSessionData.session_id}`)) {
-            localStorage.setItem(`session${storeSessionData.session_id}`, JSON.stringify(storeSessionData));
-        }
-        console.log('createSorage');
-    },
-}
-
-const userToken = {
+export const userToken = {
     setUserToken: function (token) {
         localStorage.setItem('userToken', token);
         console.log('User token set:', token);
@@ -30,5 +12,50 @@ const userToken = {
     }
 };
 
-export default { sessionStorage, userToken };
+export const currentSession = {
+    setSession: function (id, code) {
+        const session = { id, code };
+        localStorage.setItem('currentSession', JSON.stringify(session));
+        console.log('Current session set:', session);
+    },
+    getSession: function () {
+        const session = localStorage.getItem('currentSession');        
+        return localStorage.getItem('currentSession') ? JSON.parse(session) : null;
+    },
+    removeSession: function () {
+        localStorage.removeItem('currentSession');
+        console.log('Current session removed');
+    }
+};
+
+export const currentSessionPlayers = {
+    setSessionPlayers: function (players) {
+        localStorage.setItem('sessionPlayers', JSON.stringify(players));
+        console.log('Session players set:', players);
+    },
+    getSessionPlayers: function () {
+        const players = localStorage.getItem('sessionPlayers');
+        return localStorage.getItem('sessionPlayers') ? JSON.parse(players) : null;
+    },
+    removeSessionPlayers: function () {
+        localStorage.removeItem('sessionPlayers');
+        console.log('Session players removed');
+    },
+
+    setPlayerResult: function (player, results) {
+        const playerResult = { player, results };
+        localStorage.setItem(`${player}_result`, JSON.stringify(playerResult));
+        console.log('Player result set:', playerResult);
+    },
+    getPlayerResult: function (player) {
+        const playerResult = localStorage.getItem(`${player}`);
+        return localStorage.getItem(`${player}`) ? JSON.parse(playerResult) : null;
+    },
+    removePlayerResult: function (player) {
+        localStorage.removeItem(`${player}`);
+        console.log('Player result removed');
+    }
+};
+
+// export { sessionStorageUtils, userToken, currentSession };
 

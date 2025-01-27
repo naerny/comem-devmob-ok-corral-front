@@ -1,43 +1,28 @@
-import { reactive, watch } from "vue";
+import { ref, watch, watchEffect } from "vue";
+import { currentSession, currentSessionPlayers } from '@/utils/localStorage.js';
 
-const storePlayer1 = reactive({    
-    name: 'John',
-        orientation_start: {
-            alpha: 0,
-            beta: 0,
-            gamma: 0
-        },
-        orientation_end: {
-            alpha: 0,
-            beta: 0,
-            gamma: 0
-        }
+const storePlayer1 = ref(null)
+
+const storePlayer2 = ref(null)
+
+watchEffect(() => {
+    storePlayer1.value = currentSessionPlayers.getPlayerResult('player1_result');
+    storePlayer2.value = currentSessionPlayers.getPlayerResult('player2_result');
 });
 
-const storePlayer2 = reactive({    
-    name: 'John',
-    orientation_start: {
-        alpha: 0,
-        beta: 0,
-        gamma: 0
-    },
-    orientation_end: {
-        alpha: 0,
-        beta: 0,
-        gamma: 0
-    }
-});
+const setPlayerResults = (player, results) => {
+    player.results = results;
+    if (player) {
+        currentSessionPlayers.setPlayerResult(player);
+    } else {
+        currentSessionPlayers.removePlayerresult();
+    }  
+};
 
-
-watch(() => storePlayer1, (newValue, oldValue) => {
-    console.log('Changes detected in storePlayer2');
-    console.log('New value:', newValue);    
-  }, { deep: true });
-
-  watch(() => storePlayer2, (newValue, oldValue) => {
-    console.log('Changes detected in storePlayer2');
-    console.log('New value:', newValue);    
-  }, { deep: true });
-
-
-export default {storePlayer1, storePlayer2};
+export const usePlayerStore = () => {
+    return {
+        storePlayer1,
+        storePlayer2,
+        setPlayerResults,
+    };
+} 
