@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-const countdown = ref(3);
+const countdown = ref(10);
 const countdownOver = ref(false);
 
 const startCountdown = () => {
