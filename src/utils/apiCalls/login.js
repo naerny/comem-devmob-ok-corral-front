@@ -1,5 +1,4 @@
 import axios from "axios";
-import {userToken} from '@/utils/localStorage.js';
 import { useLogInStore } from '@/stores/storeUserLogIn.js';
 import { showModal } from '@/utils/modalManager.js';
 import router from '@/router/index.js';
@@ -25,8 +24,7 @@ const login = async (
             }
         );
 
-        console.log("Response:", response.data);
-        // userToken.setUserToken(response.data.token);
+        console.log("Response:", response.data);        
         const { setToken } = useLogInStore();
         setToken(response.data.token);                 
         router.push({ name: 'home' });        

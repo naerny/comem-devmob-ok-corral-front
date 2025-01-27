@@ -9,10 +9,9 @@
   </template>
   
   <script setup>
-  import { ref, onMounted, onUnmounted } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { startCountdown, countdown } from '@/utils/countdown.js';
   
-//   const countdown = ref(10);
   const countdownDisplay = ref(countdown);
 
   

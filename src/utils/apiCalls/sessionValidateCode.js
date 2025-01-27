@@ -1,14 +1,12 @@
 import axios from "axios";
-import { userToken, currentSession } from '@/utils/localStorage.js';
+import { userToken } from '@/utils/localStorage.js';
 import { showModal } from '@/utils/modalManager.js';
-import { wsClient } from '@/composables/useWebsocket.js';
 import { useSessionStore } from "@/stores/storeSession.js";
 import { useWebsocket } from "@/composables/useWebsocket.js";
 const { sub } = useWebsocket();
 
 export const sessionValidateCode = async (codeToValidate) => {
     const token = userToken.getUserToken();
-    //  const codeToValidate = currentSession.getSession().code;
 
     try {
         const response = await axios.get(
@@ -21,13 +19,8 @@ export const sessionValidateCode = async (codeToValidate) => {
         );
 
         const { setSession } = useSessionStore();
-        setSession(response.data.session._id, response.data.session.session_code);
-
-        // wsClient.sub(response.data.session._id, (message) => {
-        //     console.log("wsClient: ", message);
-        // });   
+        setSession(response.data.session._id, response.data.session.session_code);        
         sub(response.data.session._id);
-        // wsClient.pub(response.data.session._id,  'Skibidy' );
         console.log("response.data: ", response.data);
         showModal(response.data.message);
         return response.data;

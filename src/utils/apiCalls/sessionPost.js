@@ -21,12 +21,8 @@ export const createSession = async () => {
 
         console.log("Response:", response.data);      
         const { setSession } = useSessionStore();
-        setSession(response.data.session._id, response.data.session.session_code);
-        const { setSessionPlayers } = useSessionStore();
+        setSession(response.data.session._id, response.data.session.session_code);        
         sub(response.data.session._id);
-
-        // count admin in session
-        // setSessionPlayers(1);
         showModal(response.data.message);
         return response.data;
         // Handle success (e.g., redirecting to another page)

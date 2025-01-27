@@ -1,5 +1,5 @@
-import { ref, watch, watchEffect } from "vue";
-import { currentSession, currentSessionPlayers } from '@/utils/localStorage.js';
+import { ref, watchEffect } from "vue";
+import { currentSessionPlayers } from '@/utils/localStorage.js';
 
 const storePlayer1 = ref(null)
 

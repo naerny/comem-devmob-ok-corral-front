@@ -1,7 +1,6 @@
 <script setup>
 import { useSessionStore } from "@/stores/storeSession.js";
 const {sessionPlayers} = useSessionStore();
-import { createGame } from "@/utils/apiCalls/gamePost.js"
 </script>
 
 <template>

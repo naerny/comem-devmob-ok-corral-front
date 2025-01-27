@@ -3,19 +3,13 @@ import WsClient from '../websocketlibrary/WSClient.js';
 import { useSessionStore } from "@/stores/storeSession.js";
 const { setSessionPlayers, setSession } = useSessionStore();
 import { usePlayerStore } from "@/stores/storePlayers.js";
-const { setPlayerResults } = usePlayerStore();
 import { useGameManager } from '@/utils/gameManager.js';
-import { currentSessionPlayers } from '@/utils/localStorage.js';
 const { gameStarted, resultsObtained, endGame, GameResults } = useGameManager();
 import router from '@/router/index.js';
 import { showModal } from '@/utils/modalManager.js';
 
 export const wsClient = new WsClient(`ws://${import.meta.env.VITE_WS_URL}:8887`);
 await wsClient.connect();
-
-// wsClient.sub('duel_123456', (message) => {
-//   console.log(message);
-// });
 
 export function useWebsocket() {
 
@@ -59,8 +53,7 @@ export function useWebsocket() {
                     console.log('Game Ended');
                 }
 
-            } else if (message.action === 'endGame') {
-                // setSession(message.session, message.players);                
+            } else if (message.action === 'endGame') {                              
                 console.log('endGame');
                 showModal('Game Ended');
 

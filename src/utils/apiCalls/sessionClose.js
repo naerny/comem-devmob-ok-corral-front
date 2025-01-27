@@ -1,10 +1,7 @@
 import axios from "axios";
-import { userToken, currentSession} from '@/utils/localStorage.js';
+import { userToken } from '@/utils/localStorage.js';
 import { showModal } from '@/utils/modalManager.js';
-import { useSessionStore } from "@/stores/storeSession.js";
 import { wsClient } from "@/composables/useWebsocket";
-import { useWebsocket } from "@/composables/useWebsocket.js";
-const { sub } = useWebsocket();
 
 export const closeSession = async (sessionId) => {
     const token = userToken.getUserToken();

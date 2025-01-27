@@ -1,7 +1,6 @@
 <script setup>
-import { createGame } from "@/utils/apiCalls/gamePost.js"
 import { useGameManager} from "@/utils/gameManager.js"
-const { gameStarted, startGame } = useGameManager();
+const { startGame } = useGameManager();
 </script>
 
 <template>

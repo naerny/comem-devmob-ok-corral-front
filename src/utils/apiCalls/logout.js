@@ -25,7 +25,6 @@ export const logout = async () => {
         );
 
         console.log("Response:", response.data);
-        // userToken.removeUserToken();
         const { setToken } = useLogInStore();
         setToken(null);
         showModal(response.data.message);        

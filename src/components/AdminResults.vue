@@ -1,8 +1,7 @@
 
   <script setup>
   import { closeSession } from '../utils/apiCalls/sessionClose.js';
-  import { currentSession } from '@/utils/localStorage.js';
-  import { useSessionStore } from '@/stores/storeSession.js';
+  import { currentSession } from '@/utils/localStorage.js';  
   import { useGameManager } from "@/utils/gameManager.js"
   const { calcResults } = useGameManager();
   const results = calcResults();

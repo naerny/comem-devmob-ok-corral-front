@@ -1,21 +1,5 @@
 import { ref } from "vue";
 
-// export const getDeviceOrientation = async () => {
-
-//     const orientation = ref({ alpha: 0, beta: 4, gamma: 0 });
-
-//     const event = new Event("deviceorientation");
-//     orientation.value.alpha = event.alpha;
-//     orientation.value.beta = event.beta;
-//     orientation.value.gamma = event.gamma;
-
-
-
-
-//     return orientation.value;
-// }
-
-
 export const getDeviceOrientation = () => {
   return new Promise((resolve) => {
     const handleOrientationEvent = (event) => {

@@ -104,17 +104,6 @@ onUnmounted(() => {
   <div class="component-container">
   <h2 v-if="countdown > 0">Get ready</h2>
   <h3>Player {{ PlayerId }}</h3>
-
-  <!-- <p>Alpha: {{ orientation.alpha }}</p>
-  <p>Beta: {{ orientation.beta }}</p>
-  <p>Gamma: {{ orientation.gamma }}</p>
-  {{ faceDown }}
-  {{ faceHorizontal }}
-  <br>
-  {{ faceDownChecked }}
-  {{ faceHorizontalChecked }}
-  {{ countdown }}
-  {{ triggerTime }} -->
   <button v-if="countdown > 0" class="disabled">SHOOT</button>
   <button @click="shoot" class="fullsize" v-else>!!SHOOT!!</button>
 </div>

@@ -17,8 +17,7 @@ const formFields = [
 <template>
      <form
         @submit.prevent="
-            () => {
-                // login(formFields[0].value);                
+            () => {                              
                 sessionValidateCode(formFields[0].value);
             }
         "

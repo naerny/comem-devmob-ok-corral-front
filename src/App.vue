@@ -1,31 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { isMobile } from './utils/mobileDetect';
-import { logout } from './utils/apiCalls/logout';
+import { RouterView } from 'vue-router'
 import HeaderComponent from './components/Header.vue';
-import { useLogInStore } from '@/stores/storeUserLogIn.js';
-import { useSessionStore } from '@/stores/storeSession.js';
 import Modal from '@/components/ModalInfo.vue';
 import { message } from '@/utils/modalManager.js';
-import { useGameManager} from "@/utils/gameManager.js"
-const { gameStarted, GameResults, resultsObtained } = useGameManager();
-const { isLoggedIn } = useLogInStore();
-const { hasSession } = useSessionStore();
-import { usePlayerStore} from '@/stores/storePlayers.js';
-const { storePlayer1, storePlayer2 } = usePlayerStore();
 
 </script>
 
 <template>
-  <!-- <p>Message; {{ message }};</p>
-  <p v-if="isLoggedIn">You are logged in</p>
-  <p v-if="!isLoggedIn">You are not logged in</p>
-  <p>Session {{ hasSession }};</p>
-  <p>Game started {{ gameStarted }};</p>
-  <p>Game results {{ GameResults }};</p>
-  <p>Player 1 {{ storePlayer1 }};</p>
-  <p>Player 2 {{ storePlayer2 }};</p>
-  <p>Results obtained {{ resultsObtained }};</p> -->
   <nav>
     <HeaderComponent />
     <div class="container">

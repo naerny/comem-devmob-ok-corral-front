@@ -1,9 +1,6 @@
 import axios from "axios";
 import { userToken } from '@/utils/localStorage.js';
 import { showModal } from '@/utils/modalManager.js';
-import { useSessionStore } from "@/stores/storeSession.js";
-const { getSession } = useSessionStore();
-
 
 export const createGame = async () => {
     const token = userToken.getUserToken();

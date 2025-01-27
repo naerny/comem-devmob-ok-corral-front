@@ -1,12 +1,10 @@
-import { ref, watch } from 'vue';
-import { useWebsocket, wsClient } from '@/composables/useWebsocket';
+import { ref } from 'vue';
+import {  wsClient } from '@/composables/useWebsocket';
 import { useSessionStore } from '@/stores/storeSession';
 const { getSession } = useSessionStore();
 import { createGame } from '@/utils/apiCalls/gamePost.js';
 import { closeGame } from '@/utils/apiCalls/gameClose.js';
 import { gameResult } from '@/utils/apiCalls/gameResult.js';
-import { usePlayerStore } from '@/stores/storePlayers';
-const { storePlayer1, storePlayer2 } = usePlayerStore();
 
 const gameStarted = ref(null);
 const GameResults = ref(null);

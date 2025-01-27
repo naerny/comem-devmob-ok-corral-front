@@ -45,11 +45,6 @@ watch(() => props.message, (newMessage) => {
 });
 
 const isVisible = ref(false);
-
-// progressBarAnim();
-// setTimeout(() => {
-//     isVisible.value = false;   
-// }, props.duration);
 </script>
 
 <style scoped lang="scss">
